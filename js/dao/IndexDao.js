@@ -11,7 +11,14 @@ class IndexDao{
             Connection.getConnection().then(connection => {
                 connection.transaction(transaction => {
                     transaction.executeSql('SELECT * FROM jogadores;', [], (t, result) => {
-                        resolve(result.rows);
+
+                        let jogadores = [];
+
+                        for(let i = 0; i < result.rows.length; i++){
+                            jogadores.push(result.rows[i]);
+                        }
+
+                        resolve(jogadores);
                     }, (t, e) => console.log(e));
                 })
             });

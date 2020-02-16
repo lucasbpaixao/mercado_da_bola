@@ -14,7 +14,7 @@ class IndexService{
     getJogadores(){
         return new Promise((resolve, reject) => {
             this._dao.getJogadores().then(jogadores => {
-
+                this._indexView.updateCards(jogadores);
             });
         });
     }
