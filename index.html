@@ -16,7 +16,7 @@
   <title>Majority</title>
 </head>
 
-<body>
+<body onload="controller.iniciarIndex()">
 
 
   <nav class="navbar navbar-dark bg-dark">
@@ -26,15 +26,21 @@
     </a>
   </nav>
 
-  <div class="container">
+  <div class="container mt-5" style="text-align: center">
 
+    <h1> PRINCIPAIS JOGADORES </h1>
     <div id="cards">
     </div>
   </div>
 
   <script src="js/services/Connection.js"></script>
+  <script src="js/services/IndexService.js"></script>
+  <script src="js/dao/IndexDao.js"></script>
   <script src="js/views/IndexView.js"></script>
-  <script src="js/controllers/"></script>
+  <script src="js/controllers/Controller.js"></script>
+  <script>
+    var controller = new Controller();
+  </script>
 </body>
 
 </html>
