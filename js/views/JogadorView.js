@@ -12,26 +12,41 @@ class JogadorView{
                     <br>
                     <p><b>Posicao:</b> ${jogador.posicao}</p>
                     <p><b>Time Atual:</b> ${jogador.time}</p>
-                    <p><b>Valor:</b> R$ ${jogador.valor}</p>
+                    <p><b>Valor:</b> R$ ${this.formataValor(jogador.valor)}</p>
                     <b>Conquistas</b>
                     <br>
                     ${jogador.conquistas.map(conquista => {
                         return `- ${conquista.conquista} <br>`;
                     })}
+                    <br>
                     <div class="input-group mb-3" style="width: 200px">
                         <div class="input-group-prepend">
                             <span class="input-group-text">R$</span>
                         </div>
-                        <input type="text" id="inputValor" class="form-control" onkeyup="controller.analisaProposta()">
+                        <input type="text" id="inputValor" class="form-control" onkeyup="controller.analisaProposta(${jogador.valor})">
                         <div class="input-group-append">
-                            <span class="input-group-text">&#128545;</span>
+                            <span class="input-group-text" id="status"></span>
                         </div>
                     </div>
                 </div>
             </div>
         `;
     }
+    
     updateJogador(jogador){
-        this._templateJogador(jogador);
+
+        console.log(jogador);
+        let jogadorDiv = document.querySelector('#jogador');
+        jogadorDiv.innerHTML = this._templateJogador(jogador).split(',').join('');
+    }
+
+    formataValor(valor){
+        valor = '' + valor + ''; 
+        
+        let valorFormatado = valor.substring(0,3) + '.';
+        valorFormatado += valor.substring(3,6) + '.';
+        valorFormatado += valor.substring(6,9);
+
+        return valorFormatado;
     }
 }

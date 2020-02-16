@@ -24,4 +24,33 @@ class IndexDao{
             });
         });
     }
+
+    getJogador(id){
+        return new Promise((resolve, reject) => {
+            Connection.getConnection().then(connection => {
+                connection.transaction(transaction => {
+                    transaction.executeSql('SELECT * FROM jogadores where id = ?;', [id], (t, resultJogador) => {
+
+                        transaction.executeSql('SELECT * FROM conquistas where id_jogador = ?;', [id], (t, resultConquistas) => {
+                            transaction.executeSql('SELECT * FROM descricao where id_jogador = ?;', [id], (t, resultDescricao) => {
+                                
+                                let jogador = resultJogador.rows[0];
+                                jogador["conquistas"] = [];
+    
+                                for(let i = 0; i < resultConquistas.rows.length; i++){
+
+                                    jogador["conquistas"].push(resultConquistas.rows[i]);
+                                }
+
+                                jogador["descricao"] = resultDescricao.rows[0].descricao;
+        
+                                resolve(jogador);
+                            });
+                        });
+
+                    }, (t, e) => console.log(e));
+                })
+            });
+        });
+    }
 }

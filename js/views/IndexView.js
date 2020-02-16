@@ -11,7 +11,8 @@ class IndexView{
                          <h5 class="card-title">${jogador.nome}</h5>
                         <p class="card-text">Posição: ${jogador.posicao} <br>
                                              Idade: ${jogador.idade} <br>
-                                             Valor: R$ ${jogador.valor}
+                                             Time: ${jogador.time}<br>
+                                             Valor: R$ ${this.formataValor(jogador.valor)}<br>
                          </p>
                             <a href="jogador.html?id=1" class="btn btn-primary">Fazer uma Proposta</a>
                     </div>
@@ -26,5 +27,15 @@ class IndexView{
         let cards = document.querySelector('#cards');
 
         cards.innerHTML = this._templateCards(jogadores).split(',').join('');
+    }
+
+    formataValor(valor){
+        valor = '' + valor + ''; 
+        
+        let valorFormatado = valor.substring(0,3) + '.';
+        valorFormatado += valor.substring(3,6) + '.';
+        valorFormatado += valor.substring(6,9);
+
+        return valorFormatado;
     }
 }

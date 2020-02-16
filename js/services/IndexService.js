@@ -3,6 +3,7 @@ class IndexService{
     constructor(){
         this._dao = new IndexDao();
         this._indexView = new IndexView();
+        this._jogadorView = new JogadorView();
     }
 
     inicializaDB(){
@@ -18,4 +19,13 @@ class IndexService{
             });
         });
     }
+
+    descJogador(){
+        let id = location.search.slice(1).replace('id=', '');
+
+        this._dao.getJogador(id).then(jogador => {
+            this._jogadorView.updateJogador(jogador);
+        });
+    }
+
 }
