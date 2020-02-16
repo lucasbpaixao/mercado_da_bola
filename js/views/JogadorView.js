@@ -1,6 +1,6 @@
-class JogadorView{
+class JogadorView {
 
-    _templateJogador(jogador){
+    _templateJogador(jogador) {
         return `
         <h1> ${jogador.nome} </h1>
 
@@ -16,36 +16,42 @@ class JogadorView{
                     <b>Conquistas</b>
                     <br>
                     ${jogador.conquistas.map(conquista => {
-                        return `- ${conquista.conquista} <br>`;
-                    })}
+            return `- ${conquista.conquista} <br>`;
+        })}
                     <br>
-                    <div class="input-group mb-3" style="width: 200px">
-                        <div class="input-group-prepend">
+                    <div class="input-group mb-3" style="width: 500px">
+                    Valor da proposta:    
+                    <div class="input-group-prepend ml-3">
                             <span class="input-group-text">R$</span>
                         </div>
+                        
                         <input type="text" id="inputValor" class="form-control" onkeyup="controller.analisaProposta(${jogador.valor})">
                         <div class="input-group-append">
                             <span class="input-group-text" id="status"></span>
                         </div>
+
+                        <button type="button" class="btn btn-secondary ml-3" onclick="controller.enviarProposta(inputValor.value)">Enviar Proposta</button>
                     </div>
+
+                    
                 </div>
             </div>
         `;
     }
-    
-    updateJogador(jogador){
+
+    updateJogador(jogador) {
 
         console.log(jogador);
         let jogadorDiv = document.querySelector('#jogador');
         jogadorDiv.innerHTML = this._templateJogador(jogador).split(',').join('');
     }
 
-    formataValor(valor){
-        valor = '' + valor + ''; 
-        
-        let valorFormatado = valor.substring(0,3) + '.';
-        valorFormatado += valor.substring(3,6) + '.';
-        valorFormatado += valor.substring(6,9);
+    formataValor(valor) {
+        valor = '' + valor + '';
+
+        let valorFormatado = valor.substring(0, 3) + '.';
+        valorFormatado += valor.substring(3, 6) + '.';
+        valorFormatado += valor.substring(6, 9);
 
         return valorFormatado;
     }

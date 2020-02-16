@@ -1,12 +1,12 @@
-class IndexDao{
+class IndexDao {
 
-    inicializaDB(){
+    inicializaDB() {
         return new Promise((resolve, reject) => {
             Connection.inicializar().then(resolve());
         });
     }
 
-    getJogadores(){
+    getJogadores() {
         return new Promise((resolve, reject) => {
             Connection.getConnection().then(connection => {
                 connection.transaction(transaction => {
@@ -14,7 +14,7 @@ class IndexDao{
 
                         let jogadores = [];
 
-                        for(let i = 0; i < result.rows.length; i++){
+                        for (let i = 0; i < result.rows.length; i++) {
                             jogadores.push(result.rows[i]);
                         }
 
@@ -25,7 +25,19 @@ class IndexDao{
         });
     }
 
-    getJogador(id){
+    enviarProposta(valor, id) {
+        return new Promise((resolve, reject) => {
+            Connection.getConnection().then(connection => {
+                connection.transaction(transaction => {
+                    transaction.executeSql('INSERT INTO propostas (valor, id_jogador) VALUES (?,?)', [valor, id], (t, result) => {
+                        resolve();
+                    });
+                });
+            });
+        });
+    }
+
+    getJogador(id) {
         return new Promise((resolve, reject) => {
             Connection.getConnection().then(connection => {
                 connection.transaction(transaction => {
@@ -33,17 +45,17 @@ class IndexDao{
 
                         transaction.executeSql('SELECT * FROM conquistas where id_jogador = ?;', [id], (t, resultConquistas) => {
                             transaction.executeSql('SELECT * FROM descricao where id_jogador = ?;', [id], (t, resultDescricao) => {
-                                
+
                                 let jogador = resultJogador.rows[0];
                                 jogador["conquistas"] = [];
-    
-                                for(let i = 0; i < resultConquistas.rows.length; i++){
+
+                                for (let i = 0; i < resultConquistas.rows.length; i++) {
 
                                     jogador["conquistas"].push(resultConquistas.rows[i]);
                                 }
 
                                 jogador["descricao"] = resultDescricao.rows[0].descricao;
-        
+
                                 resolve(jogador);
                             });
                         });
