@@ -42,7 +42,6 @@ class JogadorView {
 
     updateJogador(jogador) {
 
-        console.log(jogador);
         let jogadorDiv = document.querySelector('#jogador');
         jogadorDiv.innerHTML = this._templateJogador(jogador).split(',').join('');
     }
