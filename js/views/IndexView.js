@@ -5,7 +5,7 @@ class IndexView{
         <div class="card-deck">
             ${jogadores.map(jogador => {
                 return `            
-                <div class="card mt-5">
+                <div class="card mt-5 shadow rounded-lg">
                     <img src="${jogador.link_imagem}" width="200" height="200" class="card-img-top" >
                     <div class="card-body">
                          <h5 class="card-title">${jogador.nome}</h5>
@@ -14,7 +14,7 @@ class IndexView{
                                              Time: ${jogador.time}<br>
                                              Valor: R$ ${this.formataValor(jogador.valor)}<br>
                          </p>
-                            <a href="jogador.html?id=1" class="btn btn-primary">Fazer uma Proposta</a>
+                            <a href="jogador.html?id=${jogador.id}" class="btn btn-primary">Fazer uma Proposta</a>
                     </div>
                 </div>`;
             })}

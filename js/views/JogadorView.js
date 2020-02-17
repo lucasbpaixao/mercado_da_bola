@@ -5,11 +5,12 @@ class JogadorView {
         <h1> ${jogador.nome} </h1>
 
             <div class="media">
-                <img src="${jogador.link_imagem}" class="mr-3" alt="...">
+                <img src="${jogador.link_imagem}" class="shadow-lg mr-3 ml-3 rounded-lg border border-secondary" alt="...">
                 <div class="media-body" style="text-align: left;">
                     <h5 class="mt-0"></h5>
                     ${jogador.descricao}<br>
                     <br>
+                    <p><b>Idade:</b> ${jogador.idade}</p>
                     <p><b>Posicao:</b> ${jogador.posicao}</p>
                     <p><b>Time Atual:</b> ${jogador.time}</p>
                     <p><b>Valor:</b> R$ ${this.formataValor(jogador.valor)}</p>
